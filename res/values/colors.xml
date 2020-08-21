@@ -41,4 +41,5 @@
     <color name="accent_color">#2680EB</color>
     <color name="secondary_color">#FFFFFF</color>
     <color name="inactive">#CCCCCC</color>
+    <color name="selected">#FFFFFF</color>
 </resources>

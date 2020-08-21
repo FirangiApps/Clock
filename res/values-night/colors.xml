@@ -22,4 +22,5 @@
     <color name="white_50p">#8FFFFFF0</color>
     <color name="default_background">#121212</color>
     <color name="secondary_color">#212121</color>
+    <color name="selected">#3A454A</color>
 </resources>

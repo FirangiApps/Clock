@@ -123,6 +123,7 @@
         app:backgroundColor="@color/default_background"
         app:menu="@menu/bottom_navigation_menu"
         app:textColor="@color/white"
+        app:indicatorColor="@color/selected"
         app:iconTint="@color/inactive"
         app:iconTintActive="@color/accent_color"/>
 </LinearLayout>
