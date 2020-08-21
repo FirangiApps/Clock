@@ -45,7 +45,6 @@
         <item name="android:textSize">56sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:fontFeatureSettings" tools:targetApi="21">tnum</item>
     </style>
 
     <style name="world_clock_time">
@@ -119,7 +118,7 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:gravity">center</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">36sp</item>
     </style>
 

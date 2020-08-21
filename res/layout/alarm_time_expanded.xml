@@ -116,6 +116,7 @@
         android:drawablePadding="@dimen/alarm_horizontal_padding"
         android:ellipsize="end"
         android:gravity="start|center_vertical"
+        android:textColorHint="@color/white_50p"
         android:hint="@string/label"
         android:paddingBottom="12dp"
         android:paddingEnd="4dp"

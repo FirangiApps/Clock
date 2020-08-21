@@ -115,6 +115,7 @@ public final class StopwatchCircleView extends View {
         // If a reference lap does not exist or should not be drawn, draw a simple white circle.
         if (laps.isEmpty() || !DataModel.getDataModel().canAddMoreLaps()) {
             // Draw a complete white circle; no red arc required.
+            mPaint.setColor(getResources().getColor(R.color.white));
             canvas.drawCircle(xCenter, yCenter, radius, mPaint);
 
             // No need to continue animating the plain white circle.

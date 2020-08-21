@@ -16,7 +16,10 @@
   -->
 
 <resources>
+    <color name="white">#FFFFFF</color>
+    <color name="white_08p">#14FFFFFF</color>
+    <color name="white_63p">#AFFFFFF0</color>
+    <color name="white_50p">#8FFFFFF0</color>
     <color name="default_background">#121212</color>
-    <color name="accent_color">#FEF177</color>
     <color name="secondary_color">#212121</color>
 </resources>
