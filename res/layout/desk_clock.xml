@@ -125,5 +125,9 @@
         app:textColor="@color/white"
         app:indicatorColor="@color/selected"
         app:iconTint="@color/inactive"
-        app:iconTintActive="@color/accent_color"/>
+        app:iconTintActive="@color/accent_color"
+        app:shadowColor="@color/shadow"
+        app:shadowX="0dp"
+        app:shadowY="6dp"
+        app:shadowRadius="12dp"/>
 </LinearLayout>
