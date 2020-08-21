@@ -53,9 +53,10 @@ import com.android.deskclock.provider.Alarm;
 import com.android.deskclock.uidata.TabListener;
 import com.android.deskclock.uidata.UiDataModel;
 import com.android.deskclock.widget.toast.SnackbarManager;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import me.ibrahimsn.lib.OnItemSelectedListener;
+import me.ibrahimsn.lib.SmoothBottomBar;
 
 import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_DRAGGING;
 import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE;
@@ -126,7 +127,7 @@ public class DeskClock extends BaseActivity
     private TextView mTitleView;
 
     /** The bottom navigation bar */
-    private BottomNavigationView mBottomNavigation;
+    private SmoothBottomBar bottomBar;
 
     /** {@code true} when a settings change necessitates recreating this activity. */
     private boolean mRecreateActivity;
@@ -261,44 +262,39 @@ public class DeskClock extends BaseActivity
         mFragmentTabPager.setAdapter(mFragmentTabPagerAdapter);
 
         // Mirror changes made to the selected tab into UiDataModel.
-        mBottomNavigation = findViewById(R.id.bottom_view);
-        mBottomNavigation.setOnNavigationItemSelectedListener(mNavigationListener);
-
+        bottomBar = findViewById(R.id.bottom_view);
+        bottomBar.setOnItemSelectedListener(bottomListener);
         // Honor changes to the selected tab from outside entities.
         UiDataModel.getUiDataModel().addTabListener(mTabChangeWatcher);
-
         mTitleView = findViewById(R.id.title_view);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mNavigationListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+    private OnItemSelectedListener bottomListener = new OnItemSelectedListener() {
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        public boolean onItemSelect(int i) {
+            System.out.println(i);
             UiDataModel.Tab tab = null;
-            switch (item.getItemId()) {
-                case R.id.page_alarm:
+            switch (i) {
+                case 0:
                     tab = UiDataModel.Tab.ALARMS;
                     break;
 
-                case R.id.page_clock:
+                case 1:
                     tab = UiDataModel.Tab.CLOCKS;
                     break;
 
-                case R.id.page_timer:
+                case 2:
                     tab = UiDataModel.Tab.TIMERS;
                     break;
 
-                case R.id.page_stopwatch:
+                case 3:
                     tab = UiDataModel.Tab.STOPWATCH;
                     break;
             }
-
             if (tab != null) {
                 UiDataModel.getUiDataModel().setSelectedTab(tab);
                 return true;
             }
-
             return false;
         }
     };
@@ -438,6 +434,7 @@ public class DeskClock extends BaseActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Recreate the activity if any settings have been changed
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SettingsMenuItemController.REQUEST_CHANGE_SETTINGS
                 && resultCode == RESULT_OK) {
             mRecreateActivity = true;
@@ -460,15 +457,29 @@ public class DeskClock extends BaseActivity
     }
 
     /**
-     * Configure the {@link #mFragmentTabPager} and {@link #mBottomNavigation} to display
+     * Configure the {@link #mFragmentTabPager} and {@link #bottomBar} to display
      * UiDataModel's selected tab.
      */
     private void updateCurrentTab() {
         // Fetch the selected tab from the source of truth: UiDataModel.
         final UiDataModel.Tab selectedTab = UiDataModel.getUiDataModel().getSelectedTab();
-        // Update the selected tab in the mBottomNavigation if it does not agree with UiDataModel.
-        mBottomNavigation.setSelectedItemId(selectedTab.getPageResId());
-
+        // Update the selected tab in the bottomBar if it does not agree with UiDataModel.
+        int selectedPage = 0;
+        switch (selectedTab.name()) {
+            case "ALARMS":
+                selectedPage = 0;
+                break;
+            case "CLOCKS":
+                selectedPage = 1;
+                break;
+            case "TIMERS":
+                selectedPage = 2;
+                break;
+            case "STOPWATCH":
+                selectedPage = 3;
+                break;
+        }
+        bottomBar.setItemActiveIndex(selectedPage);
         // Update the selected fragment in the viewpager if it does not agree with UiDataModel.
         for (int i = 0; i < mFragmentTabPagerAdapter.getCount(); i++) {
             final DeskClockFragment fragment = mFragmentTabPagerAdapter.getDeskClockFragment(i);
@@ -479,6 +490,7 @@ public class DeskClock extends BaseActivity
         }
 
         mTitleView.setText(selectedTab.getLabelResId());
+        mTitleView.setTextColor(getColor(R.color.white));
     }
 
     /**

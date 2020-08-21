@@ -116,17 +116,13 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bottom_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/content"
-        android:background="@color/secondary_color"
+        android:layout_height="70dp"
+        app:backgroundColor="@color/default_background"
         app:menu="@menu/bottom_navigation_menu"
-        app:itemIconTint="@color/tab_tint_color"
-        app:itemTextColor="@color/tab_tint_color"
-        app:itemTextAppearanceActive="@style/navText"
-        app:itemTextAppearanceInactive="@style/navText"
-        app:labelVisibilityMode="labeled" />
-
+        app:textColor="@color/white"
+        app:iconTint="@color/inactive"
+        app:iconTintActive="@color/accent_color"/>
 </LinearLayout>
