@@ -24,4 +24,5 @@
     <color name="secondary_color">#212121</color>
     <color name="shadow">#191D1E</color>
     <color name="selected">#3A454A</color>
+    <color name="no_alarms">#4CFFFFFF</color>
 </resources>
